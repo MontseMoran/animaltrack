@@ -1,0 +1,107 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 1.5rem;
+  padding: 2rem;
+  text-align: center;
+
+&__logo{
+    width: 120px;
+    height: auto;
+    opacity: 0.9;
+}
+&__button {
+  background-color: #e4995d;
+  color: white;
+  font-size: 1rem;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  :hover{
+     background-color: #e67d28;
+  }
+}
+
+ &__welcome {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #4d2b1f;
+  margin-block: 0.5rem 1rem;
+}
+&__cards{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 400px;
+}
+&__card{
+   background-color: #fefefe;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  cursor: pointer;
+}
+&__card-name{
+    font-size: 1.2rem;
+  font-weight: bold;
+  color: #4e2a1e;
+  margin-bottom: 0.5rem;
+}
+&__card-species{
+  font-size: 1rem;
+  color: #6b4c3b;
+}
+
+  &__add {
+    background-color: #d4a276; // más oscuro que las cards normales
+    color: white;
+    font-size: 2.5rem;
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease;
+    height: 50px;
+    width: 50px;
+
+    &:hover {
+      background-color: #c48450;
+    }
+  }
+}
+
+
+@media (min-width: 768px) {
+  .dashboard {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 3rem;
+
+  &__button {
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+  }
+
+  &__logo {
+    width: 250px;
+  }
+  &__cards{
+    flex-direction: row;
+    justify-content: center;
+  }
+  &__card{
+    width: 150px;
+  }
+}
+}

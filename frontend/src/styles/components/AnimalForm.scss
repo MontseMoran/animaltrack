@@ -1,0 +1,198 @@
+.animal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  max-width: 500px;
+  width: 100%;
+  margin: 1rem auto;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+  &__title {
+    font-size: 1.5rem;
+    color: #4d2b1f;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  &__check {
+    display: flex; // cambiado de inline-flex a flex
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    margin: 0.6rem 0;
+    color: #4d2b1f;
+  }
+
+  &__preview {
+    margin: 1rem 0;
+    text-align: center;
+
+    img {
+      max-width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+  }
+
+  label {
+    font-weight: 500;
+    color: #4d2b1f;
+    font-size: 0.9rem;
+    margin-bottom: 0.2rem;
+  }
+
+  input,
+  select,
+  textarea {
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    width: 100%;
+    margin-bottom: 0.8rem;
+  }
+
+  input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #e4995d;
+    cursor: pointer;
+  }
+
+  fieldset {
+    border: none;
+    margin: 0.5rem 0;
+
+    legend {
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+      color: #4d2b1f;
+    }
+
+    label {
+      display: inline-flex;
+      align-items: center;
+      margin-right: 1rem;
+      font-weight: 400;
+
+      input[type="radio"] {
+        margin-right: 0.3rem;
+      }
+    }
+  }
+
+  &__btn-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+
+    button {
+      flex: 1;
+      margin: 0 0.3rem;
+      padding: 0.7rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: #e4995d;
+      color: #fff;
+      font-weight: 600;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #e67d28;
+      }
+
+      &.animal-form__btn-back {
+        background-color: #ccc;
+        color: #333;
+
+        &:hover {
+          background-color: #999;
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
+.illness-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  max-width: 100%;
+  box-sizing: border-box;
+
+  .illness-chip {
+    background-color: #e4995d;
+    color: #fff;
+    border: none;
+    border-radius: 16px;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #e67d28;
+    }
+  }
+}
+.animal-form details {
+  width: 100%;         
+  display: block;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 0.5rem;
+  background-color: #fafafa;
+  overflow: hidden;
+  box-sizing: border-box; 
+}
+
+
+.animal-form summary {
+  list-style: none;
+  &::-webkit-details-marker {
+    display: none;
+  }
+}
+
+.animal-form summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: #4d2b1f;
+  position: relative;
+  padding-left: 1.5rem;
+box-sizing: border-box;
+
+  &::before {
+    content: "▶";
+    position: absolute;
+    left: 0;
+    top: 0.2rem; 
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+  }
+}
+
+
+.animal-form details[open] summary::before {
+  content: "▼";
+  transform: translateY(0.1rem);
+}
+
+
+@media (min-width: 768px) {
+  .animal-form {
+    max-width: 600px;
+    padding: 2rem;
+
+    &__title {
+      font-size: 2rem;
+    }
+  }
+}
