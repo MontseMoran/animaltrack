@@ -1,4 +1,18 @@
-function AnimalCard({id, name, species, image, hasChip = false, isSterilized = false, variant = "list", onClick}) {
+import "../styles/components/AnimalCard.scss"
+
+
+
+
+function AnimalCard({
+  id, 
+  name, 
+  species, 
+  image, 
+  hasChip = false, 
+  isSterilized = false, 
+  hasTreatment=false,  
+  variant = "list", 
+  onClick}) {
 
   return (
     <section 
@@ -9,7 +23,7 @@ function AnimalCard({id, name, species, image, hasChip = false, isSterilized = f
       {variant === "list" && (
         <>
       <div className="animal-card__img">
-        <img src={image || "/logo.png"} 
+        <img src={image || "/nopicture.svg"}
         alt={name ||"Animal sin nombre"} />
       </div>
       <div className="animal-card__title">

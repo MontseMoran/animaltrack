@@ -8,7 +8,7 @@ function AnimalForm() {
   const [hasChip, setHasChip] = useState(false);
   const [chipNumber, setChipNumber] = useState("");
   const [isSterilized, setIsSterilized] = useState(false);
-  const [sterilizedDate, setSterilizedDate] = useState("");
+  const [sterilizedDate, setSterilizedDate] = useState(null);
   const [gender, setGender] = useState("");
   const [birthDate, setBirthDate] = useState("");
   const [illnesses, setIllnesses] = useState([]);
@@ -25,8 +25,26 @@ function AnimalForm() {
   function handleBackClick() {
     navigate("/dashboard");
   }
-  function handleSaveClick() {
+  async function handleSaveClick() {
+    const newAnimal = {
+  name,
+  species,
+  chipNumber,
+  sterilizedDate,
+  image,
+  gender,
+  birthDate,
+  illnesses
+};
+
+    await fetch ("http://localhost:4000/animals", {
+      method: "POST",
+      headers: {"content-type": "application/json"},
+      body: JSON.stringify(newAnimal)
+    })
     navigate("/dashboard");
+    console.log("Enviando:", newAnimal);
+
   }
 
   function handleDeleteIllness(indexToDelete) {
@@ -156,7 +174,7 @@ function AnimalForm() {
           if (file) {
             const reader = new FileReader();
             reader.onloadend = () => {
-              setImage(reader.results);
+              setImage(reader.result);
             };
             reader.readAsDataURL(file);
           }
@@ -212,8 +230,8 @@ function AnimalForm() {
           <input
             type="date"
             placeholder="Fecha de esterilización"
-            value={sterilizedDate}
-            onChange={(ev) => setSterilizedDate(ev.target.value)}
+            value={sterilizedDate || ""}
+            onChange={(ev) => setSterilizedDate(ev.target.value || null)}
           />
         </>
         )}

@@ -8,15 +8,17 @@ const createAnimal = async (req, res) => {
     try {
        
       
-  
+  console.log("POST /animals recibido:", req.body);
     const insertAnimalQuery = 'INSERT INTO animal (nombre, chip, especie, fecha_esterilizacion, foto, lugar, protectoras_idprotectoras) VALUES (?, ?, ?, ?, ?, ?, ?)';
     const [result] = await db.query (insertAnimalQuery, [name, chipNumber, species,  sterilizedDate, image, location, protectoraId ])
+  console.log("Resultado del INSERT:", result);
 
     res.status(201).json({
         message: 'Animal guardado correctamente',
         id: result.insertId
     });
   } catch (error) {
+     console.error("❌ Error en createAnimal:", error); 
     res.status(500).json ({error: error.message})
   }
 }
