@@ -38,8 +38,29 @@ const getAnimals = async (req, res) =>{
     res.status(500).json({ error: error.message})
   }
 }
+const getAnimalById = async (req, res)=> {
+  const protectoraId = req.protectoraId;
+  if (!protectoraId) {
+    return res.status(401).json({error: "No autorizado"})
+  }
+  const {id} = req.params;
+  try {
+    const query = 
+    `SELECT idanimal AS id, nombre AS name, especie AS species, foto AS image, chip AS chipNumber, fecha_esterilizacion AS sterilizedDate, lugar AS location FROM animal WHERE idanimal = ? AND protectoras_idprotectoras = ?`;
+    const [rows] = await db.query(query, [id, protectoraId]);
+
+    if (rows.length === 0){
+      return res.status(404).json ({error: "ANimal no encontrado "});
+    }
+    res.status(200).json(rows[0]);
+  }catch (error){
+    res.status (500).json ({ error: error.message});
+  }
+
+};
 
 module.exports = {
     createAnimal,
-    getAnimals
+    getAnimals, 
+    getAnimalById
 };

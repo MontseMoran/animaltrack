@@ -5,10 +5,12 @@ import "../styles/components/Dashboard.scss";
 import { useEffect } from "react";
 import AnimalCard from "./AnimalCard";
 
+
 const nombreAsociacion = localStorage.getItem("nombreAsociacion");
 
 function Dashboard() {
   const [animals, setAnimals] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchAnimals = async () => {
@@ -23,7 +25,7 @@ function Dashboard() {
     fetchAnimals();
   }, []);
 
-  const navigate = useNavigate();
+  
 
   function handleClick() {
     navigate("/animal-form");
@@ -49,23 +51,31 @@ function Dashboard() {
           +
         </article>
         <section className="dashboard__cards">
-          {animals.map((animal) => (
-            <AnimalCard
-              key={animal.id}
-              name={animal.name}
-              image={animal.image}
-              hasTreatment={
-                Array.isArray(animal.illnesses) &&
-                animal.illnesses.some(
-                  (i) => i?.treatment?.trim() && (i?.active ?? true)
-                )
-              }
-            />
-          ))}
+      {animals.map((animal) => {
+  console.log("Imagen que llega:", animal.image);
+  return (
+    <AnimalCard
+      key={animal.id}
+      name={animal.name}
+      image={animal.image && animal.image.startsWith("data:image") && animal.image.length >50
+        ? animal.image : "/nopicture.svg"
+      }
+      hasTreatment={
+        Array.isArray(animal.illnesses) &&
+        animal.illnesses.some(
+          (i) => i?.treatment?.trim() && (i?.active ?? true)
+        )
+      }
+      onClick={() => navigate(`/animal/${animal.id}`)}
+    />
+  );
+})}
+
         </section>
       </main>
     </>
   );
-}
+}     
+
 
 export default Dashboard;

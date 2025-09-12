@@ -4,12 +4,12 @@ import "../styles/components/AnimalCard.scss"
 
 
 function AnimalCard({
-  id, 
+//id= false,
   name, 
   species, 
-  image, 
-  hasChip = false, 
-  isSterilized = false, 
+  image,
+  //hasChip= false,
+  //isSterilized = false, 
   hasTreatment=false,  
   variant = "list", 
   onClick}) {
@@ -23,7 +23,9 @@ function AnimalCard({
       {variant === "list" && (
         <>
       <div className="animal-card__img">
-        <img src={image || "/nopicture.svg"}
+        <img src={image && image.startsWith("data:image")
+          ? image:"/nopicture.svg"
+        }
         alt={name ||"Animal sin nombre"} />
       </div>
       <div className="animal-card__title">

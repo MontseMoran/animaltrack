@@ -183,8 +183,9 @@ function AnimalForm() {
       {image && (
         <div className="animal-form__preview">
           <p>Previsualización:</p>
-          <img src={image} alt="Previsualización del animal" />
+          <img src={image && image.startsWith ("data:image") ? image:"/nopicture.svg"} alt="Previsualización del animal || sin foto" />
         </div>
+        
       )}
 </details>
      <details>
