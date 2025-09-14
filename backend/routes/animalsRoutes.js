@@ -1,10 +1,13 @@
 const express =require ('express');
 const router = express.Router();
-const controller = require('../controllers/animalController');
-const {createAnimal, getAnimals, getAnimalById}= require ('../controllers/animalController')
 
-router.post('/',createAnimal);
-router.get ('/', getAnimals)
-router.get ('/:id', getAnimalById)
+const {createAnimal, getAnimals, getAnimalById, deleteAnimal}= require ('../controllers/animalController')
+
+const upload = require ('../config/multer')
+
+router.post('/',upload.single("photo"), createAnimal);
+router.get ('/', getAnimals);
+router.get ('/:id', getAnimalById);
+router.delete ('/:id', deleteAnimal);
 
 module.exports = router;

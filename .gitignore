@@ -3,6 +3,7 @@ node_modules/
 
 # Variables sensibles
 .env
+.env*
 
 # Logs
 npm-debug.log*

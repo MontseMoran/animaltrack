@@ -26,26 +26,33 @@ function AnimalForm() {
     navigate("/dashboard");
   }
   async function handleSaveClick() {
-    const newAnimal = {
-  name,
-  species,
-  chipNumber,
-  sterilizedDate,
-  image,
-  gender,
-  birthDate,
-  illnesses
+   const data = new FormData();
+  data.append("name", name);
+  data.append("species", species);
+  data.append("chipNumber", chipNumber);
+  data.append("sterilizedDate", sterilizedDate);
+  data.append("gender", gender);
+  data.append("birthDate", birthDate);
+  if (image){
+    data.append("photo", image);
+  }
+  
+  data.append("illnesses", JSON.stringify(illnesses)); 
+
+  try{
+    const response =await fetch ("http://localhost:4000/animals", {
+      method:"POST",
+      body: data,
+    });
+    const result = await response.json();
+    console.log ("Animal creado:", result);
+
+    navigate("/dashboard");
+  } catch (error){
+    console.error("Error al crear animal:", error)
+  }
 };
 
-    await fetch ("http://localhost:4000/animals", {
-      method: "POST",
-      headers: {"content-type": "application/json"},
-      body: JSON.stringify(newAnimal)
-    })
-    navigate("/dashboard");
-    console.log("Enviando:", newAnimal);
-
-  }
 
   function handleDeleteIllness(indexToDelete) {
     const updateIllnesses = illnesses.filter(
@@ -172,18 +179,14 @@ function AnimalForm() {
         onChange={(ev) => {
           const file = ev.target.files[0];
           if (file) {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-              setImage(reader.result);
-            };
-            reader.readAsDataURL(file);
+            setImage (file);
           }
         }}
       />
       {image && (
         <div className="animal-form__preview">
           <p>Previsualización:</p>
-          <img src={image && image.startsWith ("data:image") ? image:"/nopicture.svg"} alt="Previsualización del animal || sin foto" />
+          <img src={URL.createObjectURL(image)} alt="Previsualización del animal"  />
         </div>
         
       )}

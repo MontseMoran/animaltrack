@@ -1,10 +1,11 @@
-import { useParams } from "react-router";
+import { useParams, useNavigate} from "react-router";
 import { useEffect, useState } from "react";
 
 
 function AnimalDetail (){
     const {id} = useParams();
     const [animal, setAnimal] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(()=>{
         const fetchAnimal = async ()=>{
@@ -18,6 +19,25 @@ function AnimalDetail (){
         }
         fetchAnimal();
     },[id])
+    const handleDelete = async () =>{
+        if (window.confirm("¿Seguro que quieres eliminar este animal?")){
+            try{
+                const response =await fetch (`${import.meta.env.VITE_API_URL}/animals/${id}`,{
+                    method:"DELETE",
+                    })
+                    if (response.ok){
+                        alert("Animal eliminado");
+                        navigate ("/dashboard");
+                    }
+            } catch (error) {
+                console.error ("Error al eliminar", error);
+            }
+        }
+    }
+
+    const handleEdit = () =>{
+        navigate(`/animals/edit/${id}`)
+    }
     if (!animal){
         return <p>Cargando...</p>
     }
@@ -30,6 +50,10 @@ function AnimalDetail (){
     ? animal.image
     :"/nopicture.svg"}
     alt={animal.name}/>
+<div className="animal-detail__actions">
+  <button onClick={handleEdit}>✏️ Modificar</button>
+  <button onClick={handleDelete}>🗑️ Eliminar</button>
+</div>
 
   </section>
     )

@@ -27,6 +27,8 @@ function App() {
          <Route path="/dashboard" element={<Dashboard/>}/>
             <Route path="/animal-form" element={<AnimalForm/>}/>
             <Route path= "/animal/:id" element={<AnimalDetail/>}/>
+            <Route path="/animals/edit/:id" element={<AnimalForm />} />
+
       </Routes>
     
   );
